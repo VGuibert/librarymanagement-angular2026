@@ -71,7 +71,8 @@
           "options": {
             "tsConfig": "tsconfig.spec.json",
             "runner": "vitest",
-            "buildTarget": "::development"
+            "buildTarget": "::development",
+            "providersFile": "src/app/test-providers.ts"
           }
         }
       }
