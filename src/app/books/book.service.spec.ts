@@ -53,8 +53,18 @@ describe('BookService', () => {
       totalCopies: -1,
     };
 
-    const result = service.addBook(book);
+    const book2: Book = {
+      id: 1,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 1,
+      totalCopies: 0,
+    };
 
+    const result = service.addBook(book);
+    const result2 = service.addBook(book2);
+
+    expect(result2).toBe(false);
     expect(result).toBe(false);
   });
 
@@ -64,6 +74,7 @@ describe('BookService', () => {
 
     const result = service.borrowBook(1);
 
+    expect(service.getBookById(1)?.availableCopies).toBe(4);
     expect(result).toBe(true);
   });
 
@@ -87,10 +98,12 @@ describe('BookService', () => {
 
   // Test : Retourner un livre doit incrémenter availableCopies
 
-   it('should decrement availableCopies of a book you return', () => {
+   it('should increment availableCopies of a book you return', () => {
 
     const result = service.returnBook(3);
 
+    expect(service.getBookById(3)?.availableCopies).toBe(1);
+    
     expect(result).toBe(true);
   });
 
@@ -102,8 +115,8 @@ describe('BookService', () => {
 
     expect(result).toBe(false);
   });
-  // Test : Ne pas retourner un livre dont toutes les copies ont déjà été rendues
 
+  // Test : Ne pas retourner un livre dont toutes les copies ont déjà été rendues
   
    it('shouldnt return book if he doesnt exist', () => {
 

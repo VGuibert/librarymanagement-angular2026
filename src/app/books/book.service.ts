@@ -31,8 +31,12 @@ export class BookService {
     return this.books;
   }
 
+  getBookById(id : number) {
+    return this.books.find((book) => book.id == id)
+  }
+
   addBook(book: Book): boolean {
-    if (book.title == '' || book.totalCopies < 0) {
+    if (book.title == '' || book.totalCopies <= 0) {
       return false;
     }
     else{
